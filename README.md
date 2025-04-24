@@ -130,6 +130,29 @@
 - Excel 스프레드시트: `application/vnd.ms-excel`
 - PowerPoint 프레젠테이션: `application/vnd.ms-powerpoint`
 
+#  HTML 태그별 `type` 속성 필요 여부 정리
+
+| 태그 | `type` 속성 필요 여부 | 설명 |
+|------|------------------------|------|
+| `<img>` | ❌ 필요 없음 | 이미지 확장자 (`.jpg`, `.png` 등)로 자동 인식됨 |
+| `<audio>` | ❌ `<audio src="">`에는 필요 없음<br>✅ `<source>` 사용 시는 권장 | 브라우저 호환성 향상을 위해 `<source type="">` 사용 권장 |
+| `<video>` | ❌ `<video src="">`에는 필요 없음<br>✅ `<source>` 사용 시는 권장 | 다양한 포맷 지원을 위한 다중 소스 구성 시 사용 |
+| `<source>` | ✅ **필수** | `<audio>`, `<video>` 내부에서 사용할 때 MIME 타입 명시 필수 |
+| `<script>` | ⭕ 권장 (HTML5에서는 생략 가능) | 기본값은 `text/javascript`이며 보통 생략 가능 |
+| `<link>` | ✅ **필수** | 외부 CSS 연결 시 `type="text/css"` 사용 (HTML5에선 생략 가능) |
+| `<embed>` | ✅ **필수** | 삽입할 콘텐츠의 MIME 타입 명시해야 함 |
+| `<object>` | ✅ **필수** | 오디오, 비디오, PDF 등 파일의 MIME 타입 명시 필요 |
+| `<style>` | ⭕ 권장 (HTML5에서는 생략 가능) | 보통 `type="text/css"`를 명시하지만 생략 가능 |
+| `<input type="">` | ✅ **필수** | `<form>` 내부에서 입력 유형을 반드시 명시해야 함 (ex. `text`, `password`, `submit`) |
+
+---
+
+### ✅ 요약
+
+- 반드시 써야 하는 경우: `<object>`, `<embed>`, `<source>`, `<input>`
+- HTML5 기준 생략 가능하지만 써도 괜찮은 경우: `<script>`, `<style>`, `<link>`
+- 전혀 필요 없는 경우: `<img>`, `<audio src="">`, `<video src="">`
+
 ---
 
 ##  링크 태그
